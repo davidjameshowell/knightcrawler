@@ -2,9 +2,9 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches:
-      - 'master'
-      - 'main'
+    # branches:
+    #   - 'master'
+    #   - 'main'
     paths:
       - src/**
 
