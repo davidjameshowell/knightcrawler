@@ -16,15 +16,19 @@ jobs:
           - context: ./src/node/addon/
             image_name: nowaidavid/knightcrawler-addon
             tag: nowaidavid/knightcrawler-addon:latest
+            platforms: linux/amd64,linux/arm64
           - context: ./src/node/addon-jackett/
             image_name: nowaidavid/knightcrawler-addon-jackett
             tag: nowaidavid/knightcrawler-addon-jackett:latest
+            platforms: linux/amd64,linux/arm64
           - context: ./src/node/consumer/
             image_name: nowaidavid/knightcrawler-consumer
             tag: nowaidavid/knightcrawler-consumer:latest
+            platforms: linux/amd64,linux/arm64
           - context: ./src/producer/
             image_name: nowaidavid/knightcrawler-producer
             tag: nowaidavid/knightcrawler-producer:latest
+            platforms: linux/amd64
 
     steps:
       - name: Checkout repository
@@ -60,4 +64,4 @@ jobs:
           context: ${{ matrix.context }}
           push: true
           tags: ${{ matrix.tag }}
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ matrix.platforms }}
