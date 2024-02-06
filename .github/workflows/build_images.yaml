@@ -14,7 +14,7 @@ jobs:
       matrix:
         include:
           - context: ./src/node/addon/
-            iamge_name: nowaidavid/knightcrawler-addon
+            image_name: nowaidavid/knightcrawler-addon
             tag: nowaidavid/knightcrawler-addon:latest
           - context: ./src/node/addon-jackett/
             image_name: nowaidavid/knightcrawler-addon-jackett
@@ -52,6 +52,7 @@ jobs:
             latest=auto
           tags: |
             type=edge,branch=main,commit=${{ github.sha }}
+            type=sha,commit=${{ github.sha }}
       - 
         name: Build and push ${{ matrix.tag }}
         uses: docker/build-push-action@v5
