@@ -4,7 +4,11 @@ COPY . ./
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine3.18
 WORKDIR /App
 COPY --from=build-env /App/out .
+RUN addgroup -S producer && adduser -S -G producer producer
+USER producer
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+  CMD pgrep -f dotnet || exit 1
 ENTRYPOINT ["dotnet", "Producer.dll"]
