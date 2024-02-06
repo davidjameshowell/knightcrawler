@@ -60,4 +60,4 @@ jobs:
           context: ${{ matrix.context }}
           push: true
           tags: ${{ matrix.tag }}
-          platforms: linux/amd64,linux/arm64v8
+          platforms: linux/amd64,linux/arm64
