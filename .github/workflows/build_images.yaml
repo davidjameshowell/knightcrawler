@@ -30,6 +30,8 @@ jobs:
             tag: nowaidavid/knightcrawler-producer:latest
             platforms: linux/amd64
 
+    name: Build and Push Docker Images - ${{ matrix.image_name }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
