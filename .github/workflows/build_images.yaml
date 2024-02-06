@@ -63,6 +63,7 @@ jobs:
           context: ${{ matrix.context }}
           push: false
           load: true
+          provenance: false
           tags: ${{ steps.docker-metadata.outputs.tags }}
           labels: ${{ steps.docker-metadata.outputs.labels }}
           platforms: ${{ matrix.platforms }}
