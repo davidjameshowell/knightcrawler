@@ -40,6 +40,8 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: network=host
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -68,7 +70,7 @@ jobs:
           context: ${{ matrix.context }}
           push: true
           provenance: false
-          tags: 0.0.0.0:5000/dockle-examine-image:test
+          tags: localhost:5000/dockle-examine-image:test
           platforms: ${{ matrix.platforms }}
        
       # - name: Build and push ${{ matrix.image_name }}
