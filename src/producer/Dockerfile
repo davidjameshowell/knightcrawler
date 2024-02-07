@@ -4,6 +4,8 @@ ARG TARGETARCH
 WORKDIR /App
 COPY . ./
 
+RUN echo "Target: $TARGETARCH"
+
 RUN dotnet restore -a $TARGETARCH
 RUN dotnet publish -c Release -o out -a $TARGETARCH
 
