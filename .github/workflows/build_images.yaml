@@ -88,3 +88,5 @@ jobs:
         uses: davidjameshowell/dockle-action@0d5d6bf3dbaf0a1bb0bdac6975e8dca77879c663
         with:
           image: localhost:5000/dockle-examine-image:test
+        env:
+          DOCKLE_NON_SSL=true
