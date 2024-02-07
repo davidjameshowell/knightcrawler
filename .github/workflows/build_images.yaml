@@ -87,5 +87,5 @@ jobs:
       - name: Dockle - Examine Best Practices
         uses: davidjameshowell/dockle-action@a98f43d61714d99c87440a507c109a6f193bedff
         with:
-          image: localhost:5000/dockle-examine-image:test\
+          image: localhost:5000/dockle-examine-image:test
           dockle-non-ssl: true
