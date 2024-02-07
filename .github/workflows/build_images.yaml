@@ -68,7 +68,7 @@ jobs:
           context: ${{ matrix.context }}
           push: true
           provenance: false
-          tags: localhost:5000/dockle-examine-image:test
+          tags: 0.0.0.0:5000/dockle-examine-image:test
           platforms: ${{ matrix.platforms }}
        
       # - name: Build and push ${{ matrix.image_name }}
