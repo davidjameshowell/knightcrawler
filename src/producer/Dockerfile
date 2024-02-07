@@ -9,7 +9,7 @@ RUN echo "Target: $TARGETARCH"
 RUN dotnet restore -a $TARGETARCH
 RUN dotnet publish -c Release -o out -a $TARGETARCH
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0.1-bookworm-slim
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview
 WORKDIR /App
 COPY --from=build-env /App/out .
 #RUN addgroup -S producer && adduser -S -G producer producer
