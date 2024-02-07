@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-preview AS build
 
 ARG TARGETARCH
 WORKDIR /App
@@ -11,7 +11,7 @@ RUN dotnet publish -c Release -o out -a $TARGETARCH
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview
 WORKDIR /App
-COPY --from=build-env /App/out .
+COPY --from=build /App/out .
 #RUN addgroup -S producer && adduser -S -G producer producer
 #USER producer
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
