@@ -25,7 +25,7 @@ jobs:
             platforms: linux/amd64,linux/arm64
           - context: ./src/producer/
             image_name: knightcrawler-producer
-            platforms: linux/amd64
+            platforms: linux/amd64,linux/arm64
 
     name: Build - ${{ matrix.image_name }}
 
