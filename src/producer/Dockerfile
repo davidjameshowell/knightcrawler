@@ -7,9 +7,9 @@ COPY . ./
 RUN echo "Target: $TARGETARCH"
 
 RUN dotnet restore -a $TARGETARCH
-RUN dotnet publish -c Release -o out -a $TARGETARCH
+RUN dotnet publish -c Release --no-restore -o out -a $TARGETARCH
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /App
 COPY --from=build /App/out .
 #RUN addgroup -S producer && adduser -S -G producer producer
