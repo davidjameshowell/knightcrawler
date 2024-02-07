@@ -11,6 +11,11 @@ on:
 jobs:
   build-and-push-images:
     runs-on: ubuntu-latest
+    services:
+      registry:
+        image: registry:2
+        ports:
+          - 5000:5000
     strategy:
       matrix:
         include:
@@ -61,14 +66,23 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ${{ matrix.context }}
-          push: false
-          load: true
+          push: true
           provenance: false
-          tags: ${{ steps.docker-metadata.outputs.tags }}
-          labels: ${{ steps.docker-metadata.outputs.labels }}
+          tags: localhost:5000/dockle-examine-image:test
           platforms: ${{ matrix.platforms }}
        
-      # - name: Dockle - Examine Best Practices
-      #   uses: davidjameshowell/dockle-action@0d5d6bf3dbaf0a1bb0bdac6975e8dca77879c663
+      # - name: Build and push ${{ matrix.image_name }}
+      #   uses: docker/build-push-action@v5
       #   with:
-      #     image: ${{ matrix.image_name }}:latest
+      #     context: ${{ matrix.context }}
+      #     push: false
+      #     load: true
+      #     provenance: false
+      #     tags: ${{ steps.docker-metadata.outputs.tags }}
+      #     labels: ${{ steps.docker-metadata.outputs.labels }}
+      #     platforms: ${{ matrix.platforms }}
+       
+      - name: Dockle - Examine Best Practices
+        uses: davidjameshowell/dockle-action@0d5d6bf3dbaf0a1bb0bdac6975e8dca77879c663
+        with:
+          image: localhost:5000/dockle-examine-image:test
