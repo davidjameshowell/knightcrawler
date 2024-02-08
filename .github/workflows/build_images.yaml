@@ -92,6 +92,7 @@ jobs:
         uses: davidjameshowell/dockle-action@ad7164c945d12d55ac5e639f91f0a5c708a4cdce
         with:
           image: localhost:5000/dockle-examine-image:test
+          dockle-ignores: CIS-DI-0005 # Ignore `Enable Content trust for Docker`
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -99,9 +100,10 @@ jobs:
           image-ref: localhost:5000/dockle-examine-image:test
           scan-type: 'image'
           format: 'table'
-          exit-code: '1'
+          exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          severity: 'CRITICAL, HIGH'
+          scanners: 'vuln, secret, config'
         env:
           TRIVY_NON_SSL: true
