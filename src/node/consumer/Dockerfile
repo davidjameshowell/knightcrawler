@@ -21,6 +21,9 @@ ENV NODE_ENV production
 COPY --from=builder /app ./
 RUN npm prune --omit=dev
 
-EXPOSE 7001
+RUN useradd -d /home/consumer -m -s /bin/bash consumer
+USER consumer
 
+EXPOSE 7001
 ENTRYPOINT [ "node", "dist/index.cjs" ]
+HEALTHCHECK CMD [ "node", "-e", "process.exit(0);" ]
