@@ -64,7 +64,7 @@ jobs:
             type=edge,branch=main,commit=${{ github.sha }}
             type=sha,commit=${{ github.sha }}
             
-      - name: Build and push ${{ matrix.image_name }}
+      - name: Build image for scanning ${{ matrix.image_name }}
         uses: docker/build-push-action@v5
         with:
           context: ${{ matrix.context }}
@@ -72,17 +72,6 @@ jobs:
           provenance: false
           tags: localhost:5000/dockle-examine-image:test
           platforms: ${{ matrix.platforms }}
-       
-      # - name: Build and push ${{ matrix.image_name }}
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: ${{ matrix.context }}
-      #     push: false
-      #     load: true
-      #     provenance: false
-      #     tags: ${{ steps.docker-metadata.outputs.tags }}
-      #     labels: ${{ steps.docker-metadata.outputs.labels }}
-      #     platforms: ${{ matrix.platforms }}
 
       - name: Pull Built Image for Scanning
         run: |
@@ -107,3 +96,13 @@ jobs:
           scanners: 'vuln, secret, config'
         env:
           TRIVY_NON_SSL: true
+
+      - name: Push ${{ matrix.image_name }}
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ matrix.context }}
+          push: true
+          provenance: false
+          tags: ${{ steps.docker-metadata.outputs.tags }}
+          labels: ${{ steps.docker-metadata.outputs.labels }}
+          platforms: ${{ matrix.platforms }}
