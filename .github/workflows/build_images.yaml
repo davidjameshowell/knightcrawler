@@ -11,6 +11,9 @@ on:
 jobs:
   build-and-push-images:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
     services:
       registry:
         image: registry:2
