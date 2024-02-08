@@ -25,7 +25,7 @@ COPY --from=builder /app ./
 RUN npm prune --omit=dev
 
 # CIS-DI-0001
-RUN addgroup -S addon-jackett && addon-jackett -S -G addon-jackett addon-jackett
+RUN addgroup -S addon-jackett && adduser -S -G addon-jackett addon-jackett
 # CIS-DI-0008
 RUN chmod u-s /usr/bin/wall /usr/bin/expiry /usr/bin/chage /usr/bin/passwd /usr/bin/gpasswd /usr/bin/chsh /usr/bin/newgrp /usr/bin/chfn /sbin/unix_chkpwd /bin/su /bin/mount /bin/umount /usr/bin/chage /usr/bin/expiry /usr/bin/wall
 USER addon-jackett
