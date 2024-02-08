@@ -85,7 +85,8 @@ jobs:
       #     platforms: ${{ matrix.platforms }}
        
       - name: Dockle - Examine Best Practices
-        uses: davidjameshowell/dockle-action@a98f43d61714d99c87440a507c109a6f193bedff
+        uses: davidjameshowell/dockle-action@ad7164c945d12d55ac5e639f91f0a5c708a4cdce
         with:
           image: localhost:5000/dockle-examine-image:test
           dockle-non-ssl: true
+          dockle-auth-url: http://localhost:5000
