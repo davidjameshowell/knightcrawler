@@ -101,6 +101,11 @@ jobs:
         env:
           TRIVY_NON_SSL: true
 
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
       - name: Push ${{ matrix.image_name }}
         uses: docker/build-push-action@v5
         with:
