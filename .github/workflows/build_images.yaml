@@ -84,9 +84,19 @@ jobs:
       #     labels: ${{ steps.docker-metadata.outputs.labels }}
       #     platforms: ${{ matrix.platforms }}
        
-      - name: Dockle - Examine Best Practices
-        uses: davidjameshowell/dockle-action@ad7164c945d12d55ac5e639f91f0a5c708a4cdce
+      # - name: Dockle - Examine Best Practices
+      #   uses: davidjameshowell/dockle-action@ad7164c945d12d55ac5e639f91f0a5c708a4cdce
+      #   with:
+      #     image: localhost:5000/dockle-examine-image:test
+      #     dockle-non-ssl: true
+      #     dockle-auth-url: http://localhost:5000
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
         with:
-          image: localhost:5000/dockle-examine-image:test
-          dockle-non-ssl: true
-          dockle-auth-url: http://localhost:5000
+          image-ref: localhost:5000/dockle-examine-image:test
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library,config'
+          severity: 'CRITICAL,HIGH'
