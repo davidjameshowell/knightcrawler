@@ -88,12 +88,13 @@ jobs:
         with:
           image-ref: localhost:5000/dockle-examine-image:test
           scan-type: 'image'
-          format: 'table'
+          format: 'table, sarif'
           exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL, HIGH'
           scanners: 'vuln, secret, config'
+          output: 'trivy-results.sarif'
         env:
           TRIVY_NON_SSL: true
 
