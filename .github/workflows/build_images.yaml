@@ -83,17 +83,15 @@ jobs:
       #     tags: ${{ steps.docker-metadata.outputs.tags }}
       #     labels: ${{ steps.docker-metadata.outputs.labels }}
       #     platforms: ${{ matrix.platforms }}
-       
-      # - name: Dockle - Examine Best Practices
-      #   uses: davidjameshowell/dockle-action@ad7164c945d12d55ac5e639f91f0a5c708a4cdce
-      #   with:
-      #     image: localhost:5000/dockle-examine-image:test
-      #     dockle-non-ssl: true
-      #     dockle-auth-url: http://localhost:5000
 
       - name: Pull Built Image for Scanning
         run: |
           docker pull localhost:5000/dockle-examine-image:test
+
+      - name: Dockle - Examine Best Practices
+        uses: davidjameshowell/dockle-action@ad7164c945d12d55ac5e639f91f0a5c708a4cdce
+        with:
+          image: localhost:5000/dockle-examine-image:test
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
