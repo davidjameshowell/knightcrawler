@@ -94,7 +94,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: localhost:5000/dockle-examine-image:test
+          image-ref: 0.0.0.0:5000/dockle-examine-image:test
           scan-type: 'image'
           format: 'table'
           exit-code: '1'
