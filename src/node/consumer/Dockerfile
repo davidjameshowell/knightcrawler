@@ -29,4 +29,5 @@ USER consumer
 
 EXPOSE 7001
 ENTRYPOINT [ "node", "dist/index.cjs" ]
-HEALTHCHECK CMD [ "node", "-e", "process.exit(0);" ]
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD pgrep -x node > /dev/null || exit 1
